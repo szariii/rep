@@ -1,0 +1,10 @@
+#return {login:loginVal, haslo:passwordVal}
+
+function dane() {
+var loginVal = document.getElementById("email").value;
+var passwordVal = document.getElementById("haslo").value;
+
+
+
+document.write("Hello!!,  " + loginVal);
+}

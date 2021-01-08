@@ -14,7 +14,10 @@
 <input type="checkbox" class="form-check-input">
 <label>Zapamiętaj mnie</label>
 <br>
-<button type="zat" class="btn btn-primary" id="prz">Zatwierdź</button>
+<button onclick="dane()" type="zat" class="btn btn-primary" id="prz">Zatwierdź</button>
+
+
+
 </div>
 </div>
 </div>

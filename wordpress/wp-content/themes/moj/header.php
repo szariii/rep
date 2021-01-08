@@ -9,6 +9,7 @@
 	
 	<title> test </title>
 	<?php wp_head(); ?>
+	
 
 </head>
 
