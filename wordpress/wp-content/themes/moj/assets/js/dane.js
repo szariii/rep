@@ -7,3 +7,9 @@ var_dump($loginVal);
 var_dump($passwordVal); 
 exit;
 }
+
+$.ajax({
+method:"post",
+action: "dane",
+data:  { contact_email:  "mojmail@o2.pl", "contact_message" : " moja wiadomosc przykladowa" }
+})
