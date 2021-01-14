@@ -17,3 +17,9 @@ add_action('wp_enqueue_scripts','custom_theme_assets');
 
 add_action( 'wp_ajax_dane', 'dane' );
 add_action( 'wp_ajax_nopriv_dane', 'dane');
+
+
+function dane()
+{
+	$data=$_POST['data']
+}
