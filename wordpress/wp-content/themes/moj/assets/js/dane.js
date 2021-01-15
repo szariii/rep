@@ -1,17 +1,25 @@
-function dane(){
-var loginVal = document.getElementById("email").value; 
-var passwordVal = document.getElementById("haslo").value; 
+$('#prz').on('click', function(){
+  var loginVal = $('#email').value(); 
+  var passwordVal = $('#haslo').value()
 
-return {login: loginVal, password: passwordVal}
-var_dump($loginVal); 
-var_dump($passwordVal); 
-exit;
-}
+
+
 
 $.ajax({
-method:"post",
+url : "http://localhost:5000/movies"
 action: "dane",
+method:"post",
+dataType: "json",
+contentType : "application/json",
 data:  { login:  $loginVal,  
 		password: $passwordVal
 		}
 })
+
+success: (){alert('success')},
+
+error: (){alert('error')},
+
+complete: (){alert('complete')},
+
+});
