@@ -11,7 +11,7 @@ $('#prz').on('click', function () {
         contentType: "application/json",
         data: {
             login: loginVal,
-            password: passwordVal
+            password: passwordVal,
         },
 
         success: function () {

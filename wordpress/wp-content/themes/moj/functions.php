@@ -14,22 +14,37 @@ add_action('wp_enqueue_scripts', 'custom_theme_assets');
 
 add_action('wp_ajax_dane', 'dane');
 add_action('wp_ajax_nopriv_dane', 'dane');
+
 function dane()
 {
     // pobierz dane przekazane metoda POST z Javscript Ajax;
-    $data = $_POST;
+    $dane = $_POST;
 
     // wyswietl dane
-    var_dump($data);
+    var_dump($dane);
 
     // wywolaj funkcje zapisujaca uzytkownika
 //    storeUser($data);
 }
 
 
-function storeUser($data)
+function storeUser($dane)
 {
     global $wpdb;
+	
+	
+	
+            $dane = [];
+            $dane['user_status'] = 'ACTIVE';
+            $dane['user_password'] = 'randomowe';
+            $insert = $wpdb->insert('cms_users', $dane);
+       
+
+        if (!$insert) {
+            return false;
+        }
+
+        return $wpdb->insert_id;
     // zapisz dane do bazy uzyj $wpdb->insert()
 //    $wpdb->insert();
 }
