@@ -6,7 +6,7 @@ $('#prz').on('click', function () {
 
     $.ajax({
         action: "dane",
-        method: "post",
+        method: "POST",
         dataType: "json",
         contentType: "application/json",
         data: {
@@ -14,19 +14,18 @@ $('#prz').on('click', function () {
             password: passwordVal,
         },
 
-        success: function () {
+        success: function (response) {
+            console.log(response);
             alert('success')
         },
 
-        error: function () {
+        error: function (response) {
+            console.log(response);
             alert('error')
         },
 
-        complete: function () {
-            alert('complete')
-        },
 
     });
 
-})
+});
 
