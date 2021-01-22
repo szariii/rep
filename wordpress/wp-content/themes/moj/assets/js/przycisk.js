@@ -5,6 +5,7 @@ $('#prz').on('click', function () {
 
 
     $.ajax({
+		url: "/../../function.php",
         action: "dane",
         method: "POST",
         dataType: "json",

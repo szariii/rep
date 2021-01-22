@@ -14,20 +14,40 @@ add_action('wp_enqueue_scripts', 'custom_theme_assets');
 // Twoja funckja to handleStoreUser -> ona poiwnna wszystko obslugiwać. Wewnątrz niej możesz wywoływać inne funkcje pomocnicze.
 add_action('wp_ajax_dane', 'handleStoreUser');
 add_action('wp_ajax_nopriv_dane', 'handleStoreUser');
+
 function handleStoreUser()
 {
+	global $wpdb;
+	
+	
+	
     // pobierz dane przekazane metoda POST z Javscript Ajax;
     $data = $_POST;
 
     // wywolaj funkcje zapisujaca uzytkownika
-//    storeUser($data);
+   add_action('wp_enqueue_scripts','storeUser($data)');
 
     // sprawdź czy użytkownik został zapisany (pobierz ID, które zwracasz z wywołania funkcji storeUser i sprawdź czy istnieje.
     // IF()  ---> poczytaj php if   (https://www.php.net/manual/en/control-structures.if.php)
+	
+	IF ("SELECT ID FROM $wpdb->cms_users WHERE $ID=$insert_id" != null):
+	{
+		wp_send_json_success(array('status' => 200, 'message' => 'ZAPISANO'));
+	};
+	
+	else:
+	{
+		wp_send_json_success(array('status' => 404, 'message' => 'Nie udałó się zapisac' ));
+	};
+	endif;
+	
+
+}
+
 
     //jesli zapisane ID istnieje zwróc wp_send_json_succes(array('status' => 200, 'message' => 'ZAPISANO' ))
     // jeśli nie istnieje zwróc wp_send_json_succes(array('status' => 404, 'message' => 'Nie udałó się zapisac' ))
-}
+
 
 
 // Funkcja zapisująca uzytkownika w bazie
