@@ -1,32 +1,30 @@
-$('#prz').on('click', function () {
-    alert('klik');
-    var loginVal = $('#email').val;
-    var passwordVal = $('#haslo').val;
+jQuery(function ($) {
 
 
-    $.ajax({
-		url: "/../../function.php",
-        action: "dane",
-        method: "POST",
-        dataType: "json",
-        contentType: "application/json",
-        data: {
-            login: loginVal,
-            password: passwordVal,
-        },
+    $('#prz').on('click', function () {
+        alert('klik');
+        let loginVal = $('#email').val();
+        let passwordVal = $('#haslo').val();
 
-        success: function (response) {
-            console.log(response);
-            alert('success')
-        },
 
-        error: function (response) {
-            console.log(response);
-            alert('error')
-        },
-
+        $.ajax({
+            method: "POST",
+            url: "/wp-admin/admin-ajax.php",
+            data: {
+                action: "dane",
+                login: loginVal,
+                password: passwordVal,
+            },
+            success: function (response) {
+                console.log(response);
+                alert('success')
+            },
+            error: function (response) {
+                console.log(response);
+                alert('error')
+            },
+        });
 
     });
 
-});
-
+})
