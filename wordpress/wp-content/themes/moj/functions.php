@@ -17,48 +17,52 @@ add_action('wp_ajax_nopriv_dane', 'handleStoreUser');
 
 function handleStoreUser()
 {
-	global $wpdb;
+    global $wpdb;
+    
 
     // pobierz dane przekazane metoda POST z Javscript Ajax;
-    $data = $_POST;
+    $data = [
+        "email"=>$_POST['email'],
+        "password"=>$_POST['password'],
+        "name"=>$_POST['name'],
+        "surname"=>$_POST['surname'],
+        "nick"=>$_POST['nick'],
+    ];
 
-    // wywolaj funkcje zapisujaca uzytkownika
-   add_action('wp_enqueue_scripts','storeUser($data)');   // wywolanie funkcji tutaj powinieneś zrobic pisząc po prostu  $userId=  storeData($data);
 
-    // sprawdź czy użytkownik został zapisany (pobierz ID, które zwracasz z wywołania funkcji storeUser i sprawdź czy istnieje.
-    // IF()  ---> poczytaj php if   (https://www.php.net/manual/en/control-structures.if.php)
+    $select ='SELECT * FROM cms_users WHERE email = "'.$_POST['email'].'"';
+
+    $isUserExist = $wpdb->query($select);
 
 
-    /**
-     * Ten kod nie zadziała w ogole, nie można tak zapisywać;
-     * Wystarczy srapwdzić to co ta funkcja wyżej zwroci, którą powinienes wywołać.
-     * Aby sprwdzić w bazie to zrób zapytanie:
-     * $isUserExist = $wpdb->query("SELECT * FROM cms_users WHERE user_id = " . $userId);
-     * mozesz sobie sprawidzc wysweitlenie danych poprzez linijke kodu  var_dump($isUserExist);exit;
-     */
 
-    $userId = 51; // przykladowe ID aby zaboarować jak to powinno działąc
-    $isUserExist = $wpdb->query("SELECT * FROM cms_users WHERE user_id = " . $userId);;
-    // poprawny zapis IF ELSE
+
     if(!empty($isUserExist)){
+		wp_send_json_success(array('status' => 401, 'message' => 'Uzytkownik istnieje' ));
         // UZYTKOWNIK ISTNIEJE
-    }else{
+    }
+	else{
+        $userId=  storeUser($data);
+        wp_send_json_success(array('status' => 200, 'message' => 'Zapisano użytkownika' ));
+        
         // UZTYKOWNIK NIE ISTNIEJE
     }
 
 
-    // ten kod do usuniecia
-//	IF ("SELECT ID FROM $wpdb->cms_users WHERE $ID=$insert_id" != null):
-//	{
-//		wp_send_json_success(array('status' => 200, 'message' => 'ZAPISANO'));
-//	};
-//
-//	else:
-//	{
-//		wp_send_json_success(array('status' => 404, 'message' => 'Nie udałó się zapisac' ));
-//	};
-//	endif;
-	
+
+    // wywolaj funkcje zapisujaca uzytkownika
+     // wywolanie funkcji tutaj powinieneś zrobic pisząc po prostu  $userId=  storeData($data);
+    
+
+
+     
+    
+   
+    // sprawdź czy użytkownik został zapisany (pobierz ID, które zwracasz z wywołania funkcji storeUser i sprawdź czy istnieje.
+    // IF()  ---> poczytaj php if   (https://www.php.net/manual/en/control-structures.if.php)
+
+    
+
 
 }
 
@@ -69,14 +73,12 @@ function handleStoreUser()
 
 
 // Funkcja zapisująca uzytkownika w bazie
-function storeUser($dane)
+function storeUser($dane = [])
 {
     global $wpdb;
 
-
-    $dane = [];
-    $dane['user_status'] = 'ACTIVE';
-    $dane['user_password'] = 'randomowe';
+    
+    $dane['status'] = 'ACTIVE';
     $insert = $wpdb->insert('cms_users', $dane);
 
 
