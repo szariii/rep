@@ -92,81 +92,22 @@ function storeUser($data = [])
 }
 
 
-add_action('wp_enqueue_scripts', 'get_results');
 
-function get_results()
+function getUsers()
 {
     global $wpdb;
-
     $info = $wpdb->get_results("SELECT ID,email,nick,name,surname FROM cms_users");
-
-
-
-
- 
-    $info = json_decode( json_encode($info), true);
-
-
-    echo'
-    <form action="function.php" method="get">
-    <div class="container">
-        <div class="table">
-            <table class="table">
-    
-            <tr>
-                <th id="ID">ID uzytkownika</th>
-                <th id="email">Email</th>
-                <th id="login">Login</th>
-                <th id="name">Imię</th>
-                <th id="surname">Nazwisko</th>
-                <th>Akcje</th>
-            </tr>';
-
-
-    foreach($info as $one)
-    {
-    
-
-
-        echo '<tr>';
-
-        echo '<td>';
-
-        $ID = $one['ID'];
-        echo $ID;
-        echo '</td>';
-        
-        echo '<td>';
-        $email = $one['email'];
-        echo $email;
-        echo '</td>';
-
-        echo '<td>';
-        $nick = $one['nick'];
-        echo $nick;
-        echo '</td>';
-
-        echo '<td>';
-        $name = $one['name'];
-        echo $name;
-        echo '</td>';
-
-        echo '<td>';
-        $surname = $one['surname'];
-        echo $surname;
-        echo '</td>';
-
-
-
-
-        echo '</tr>';
-
-        echo '<br>';
-    }
-
-    echo '</table>
-    </div>';
+    return $info;
 }
+
+
+function getUser($userId){
+    global $wpdb;
+    $info = $wpdb->get_row("SELECT ID,email,nick,name,surname FROM cms_users WHERE ID = " . $userId);
+    return $info;
+}
+
+
 
 
 

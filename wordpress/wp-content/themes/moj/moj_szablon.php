@@ -2,6 +2,8 @@
 
 <?php get_header(); ?>
 
+
+
 <div class="container">
     <h1>Formularz tworzenia konta</h1>
 
