@@ -1,17 +1,29 @@
 <?php /* Template Name: Contact Page */ ?>
 
 <?php get_header(); ?>
-<?php the_title();?>
 
-<?php get_template_part('partials/users-table');?>
+<div class="container" style="text-align:center">
+    <div>
+    <h1>Skontaktuj się z nami</h1>
+    <br>
+    <br>
+    </div>
+    <div class="row">
+    <div class="col-4" style="text-align:center"><h3>Adres e-mail:</h3>
+    <br>
+    <h4>firma123@gmail.com</h4>
+    </div>
+    <div class="col-4" style="text-align:center"><h3>Numer telefonu:</h3>
+    <br>
+    <h4>123-456-789</h4>
+    </div>
+    <div class="col-4" style="text-align:center"><h3>Siedziba firmy:</h3>
+    <br>
+    <h4>ul. Monte Cassino 31, Kraków, 99-999</h4>
+    </div>
 
-<?php
-$user = getUser($_GET['id']);
 
-?>
-
-<div class="form-label">
-    <label for="name">Imię:</label>
-    <input type="text" class="form-control" placeholder="Wpisz imię" id="name" name="name" value="<?= $user->nick;?>">
+    </div>
+    <?php get_footer(); ?>
 </div>
 <?php get_footer(); ?>

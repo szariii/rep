@@ -3,15 +3,26 @@
 function custom_theme_assets()
 {
     wp_enqueue_style('style', get_stylesheet_uri());
-    #wp_enqueue_script( 'script', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), null, true  );
-    wp_enqueue_script('script', get_template_directory_uri() . '/assets/js/przycisk.js', array('jquery'), null, true);
-}
+    //wp_enqueue_script( 'script', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), null, true  );
+    //wp_enqueue_script('script', get_template_directory_uri() . '/assets/js/przycisk.js', array('jquery'), null, true);
+    //wp_enqueue_script('script', get_template_directory_uri() . '/assets/js/button.js', array('jquery'), null, true);
+    
+};
 
 add_action('wp_enqueue_scripts', 'custom_theme_assets');
 
 
+function script()
+{
+    wp_enqueue_script('script', get_template_directory_uri() . '/assets/js/button.js', array('jquery'), null, true);
+};
+
+add_action('wp_enqueue_scripts', 'script');
+
+
 // Gdy wywolujesz w ajax funkcje 'dane' to w functions.php musisz wykonać jakieś akcje.
 // Twoja funckja to handleStoreUser -> ona poiwnna wszystko obslugiwać. Wewnątrz niej możesz wywoływać inne funkcje pomocnicze.
+
 add_action('wp_ajax_dane', 'handleStoreUser');
 add_action('wp_ajax_nopriv_dane', 'handleStoreUser');
 
@@ -28,6 +39,8 @@ function handleStoreUser()
         "surname"=>$_POST['surname'],
         "nick"=>$_POST['nick'],
     ];
+
+
 
 
     $select ='SELECT * FROM cms_users WHERE email = "'.$_POST['email'].'"';
@@ -103,13 +116,38 @@ function getUsers()
 
 function getUser($userId){
     global $wpdb;
-    $info = $wpdb->get_row("SELECT ID,email,nick,name,surname FROM cms_users WHERE ID = " . $userId);
-    return $info;
+    $inf = $wpdb->get_row("SELECT ID,email,nick,name,surname FROM cms_users WHERE ID = " . $userId);
+    return $inf;
 }
 
 
 
 
+add_action('wp_ajax_dana', 'handleUpdateUser');
+add_action('wp_ajax_nopriv_dana', 'handleUpdateUser');
+
+function handleUpdateUser() 
+{
+    global $wpdb;
+
+
+
+
+    $ID= $_POST['id'];
+    $email= $_POST['email'];
+    $name= $_POST['name'];
+    $surname= $_POST['surname'];
+    $nick= $_POST['nick'];
+
+    
+    
+
+
+    $update= $wpdb->update('cms_users', array('surname' => $surname, 'name' => $name, 'email' => $email, 'nick' => $nick), array('ID' => $ID)); 
+
+    //$update= $wpdb->update('cms_users', array('surname' -> "'.$_POST['surnam'].'", 'name' -> "'.$_POST['nam'].'", 'email' -> "'.$_POST['emai'].'", 'nick' -> "'.$_POST['nic'].'"), array('ID' -> "'.$_POST['id'].'"); 
+
+}
 
 
 ?>
