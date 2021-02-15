@@ -1,0 +1,12 @@
+	$i = 0;
+	FOR($ID = $wpdb->get_ID( "SELECT ID FROM $wpdb->cms_users" ))
+	{
+		IF( $insert_id == $ID) {
+		$i = $ID
+		wp_send_json_success(array('status' => 200, 'message' => 'ZAPISANO'))
+		}
+		else:
+		break
+	}
+	if ($i = 0):
+	wp_send_json_success(array('status' => 404, 'message' => 'Nie udałó się zapisac' ))
