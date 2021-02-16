@@ -8,6 +8,8 @@
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
 
+    <link rel="stylesheet" href="/wp-content/themes/moj/assets/css/main.css">
+
     <title> test </title>
     <?php wp_head(); ?>
 

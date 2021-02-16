@@ -1,7 +1,6 @@
 <?php /* Template Name: Contact Page */ ?>
 
 <?php get_header(); ?>
-
 <div class="container" style="text-align:center">
     <div>
     <h1>Skontaktuj się z nami</h1>
