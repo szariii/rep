@@ -1,3 +1,19 @@
-h1 {
+#tes {
+  background-color: #0b9e0b;
+}
+
+#tes p {
   color: red;
+}
+
+.class1 {
+  background-color: red;
+}
+
+.class2 {
+  background-color: red;
+}
+
+.highlighted {
+  background-color: #0b9e0b;
 }

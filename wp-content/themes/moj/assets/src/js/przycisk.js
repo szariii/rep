@@ -1,7 +1,14 @@
 jQuery(function ($) {
 
     
-    
+    $(document).ready(function() {
+        var result = $('.form-label #id');
+        console.log(result);
+    });
+
+
+
+
     $('#editbut').on('click', function() {
         console.log()
 

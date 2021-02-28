@@ -1,7 +1,24 @@
 $primary-color: red;
+$secondary-color: rgb(11, 158, 11);
 
 
 
-h1{
+#tes{
+    background-color: $secondary-color;
+}
+
+#tes p{
     color: $primary-color;
+}
+
+.class1{
+    background-color: $primary-color;
+}
+
+.class2{
+    background-color: $primary-color;
+}
+
+.highlighted{
+    background-color: $secondary-color;
 }
